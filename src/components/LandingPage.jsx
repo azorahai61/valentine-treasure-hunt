@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "motion/react";
 import QuizGrid from "./QuizGrid";
 import ProgressTracker from "./ProgressTracker";
@@ -10,7 +11,23 @@ export default function LandingPage({
   allComplete,
   onSelectQuiz,
   onOpenFinalChallenge,
+  onResetAll,
 }) {
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  const handleResetClick = () => {
+    setShowResetConfirm(true);
+  };
+
+  const handleResetConfirm = () => {
+    setShowResetConfirm(false);
+    onResetAll();
+  };
+
+  const handleResetCancel = () => {
+    setShowResetConfirm(false);
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-cream via-pink-100 to-cream">
       <FloatingHearts />
@@ -76,9 +93,62 @@ export default function LandingPage({
         </motion.div>
       )}
 
-      <div className="text-center pb-6 text-charcoal/30 text-xs">
-        Made with ❤ by Yash
+      <div className="text-center pb-6">
+        <p className="text-charcoal/30 text-xs">Made with ❤ by Yash</p>
+
+        {onResetAll && completedQuizzes.length > 0 && (
+          <button
+            onClick={handleResetClick}
+            className="mt-2 text-[10px] text-charcoal/25 underline
+                       underline-offset-2 cursor-pointer bg-transparent
+                       border-none hover:text-charcoal/40 transition-colors"
+          >
+            Reset Progress
+          </button>
+        )}
       </div>
+
+      {/* Reset Confirmation Dialog */}
+      {showResetConfirm && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4
+                     bg-black/40 backdrop-blur-sm"
+          onClick={handleResetCancel}
+        >
+          <motion.div
+            initial={{ scale: 0.8, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            className="bg-white rounded-2xl p-6 shadow-xl max-w-xs w-full text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="text-charcoal font-semibold mb-2">Reset all progress?</p>
+            <p className="text-charcoal/60 text-sm mb-5">
+              This will clear all {completedQuizzes.length} completed quizzes. You'll start fresh!
+            </p>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={handleResetCancel}
+                className="px-5 py-2 rounded-full text-sm text-charcoal/60
+                           bg-gray-100 hover:bg-gray-200 cursor-pointer
+                           border-none transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleResetConfirm}
+                className="px-5 py-2 rounded-full text-sm text-white
+                           bg-gradient-to-r from-rose-red to-warm-coral
+                           hover:shadow-glow cursor-pointer border-none
+                           transition-all"
+              >
+                Reset
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

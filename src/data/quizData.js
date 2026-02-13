@@ -6,7 +6,7 @@ export const quizData = [
     question: "How did we first connect?",
     answers: ["hinge"],
     hint: "It's a dating app...",
-    letter: "W",
+    letter: "E",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const quizData = [
     question: "Where did we meet for our first date?",
     answers: ["marine drive"],
     hint: "A famous Mumbai promenade...",
-    letter: "I",
+    letter: "L",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const quizData = [
     question: "Where did we celebrate our first New Year together?",
     answers: ["keiba", "keiba all saints"],
     hint: "A place with 'All Saints' in its name...",
-    letter: "L",
+    letter: "Y",
   },
   {
     id: 4,
@@ -33,16 +33,16 @@ export const quizData = [
     question: "What's our favorite restaurant in Mumbai?",
     answers: ["ramashray", "ram ashray"],
     hint: "A South Indian favorite...",
-    letter: "L",
+    letter: "N",
   },
   {
     id: 5,
     emoji: "🏖️",
     topic: "Our Beach",
-    question: "Which beach in Juhu is special to us?",
+    question: "Which beach is special to us?",
     answers: ["silver beach"],
     hint: "It's a precious metal...",
-    letter: "Y",
+    letter: "I",
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ export const quizData = [
     question: "What activity have we been doing together recently?",
     answers: ["quiz", "quizzes", "playing quizzes"],
     hint: "You're doing one right now!",
-    letter: "O",
+    letter: "?",
   },
   {
     id: 7,
@@ -60,16 +60,16 @@ export const quizData = [
     question: "What was our first movie together in theaters?",
     answers: ["animal"],
     hint: "A Ranbir Kapoor film...",
-    letter: "U",
+    letter: "V",
   },
   {
     id: 8,
     emoji: "🏎️",
     topic: "Favorite Movie",
-    question: "What's our favorite movie we watched in theaters?",
+    question: "Which movie did we enjoy the most in the theaters?",
     answers: ["f1"],
     hint: "Fast cars and racing...",
-    letter: "B",
+    letter: "L",
   },
   {
     id: 9,
@@ -78,7 +78,7 @@ export const quizData = [
     question: "What's our go-to fast food chain?",
     answers: ["taco bell", "burger king"],
     hint: "Think Mexican or burgers...",
-    letter: "E",
+    letter: "W",
   },
   {
     id: 10,
@@ -87,7 +87,7 @@ export const quizData = [
     question: "What's our favorite food to eat together?",
     answers: ["pizza", "pasta"],
     hint: "Italian cuisine...",
-    letter: "M",
+    letter: "E",
   },
   {
     id: 11,
@@ -96,7 +96,7 @@ export const quizData = [
     question: "Where was our best trip together?",
     answers: ["hyderabad"],
     hint: "City of Nizams and biryani...",
-    letter: "Y",
+    letter: "A",
   },
   {
     id: 12,
@@ -105,7 +105,7 @@ export const quizData = [
     question: "What show did we love watching together?",
     answers: ["when life gives you tangerines", "tangerines"],
     hint: "A fruity title...",
-    letter: "V",
+    letter: "T",
   },
   {
     id: 13,
@@ -114,25 +114,25 @@ export const quizData = [
     question: "What's my favorite show?",
     answers: ["haikyuu"],
     hint: "An anime about volleyball...",
-    letter: "A",
+    letter: "N",
   },
   {
     id: 14,
     emoji: "🧸",
     topic: "LDR Gift",
-    question: "What did we exchange when going long distance?",
+    question: "What did we exchange when I was going to US?",
     answers: ["soft toys", "soft toy", "toys"],
     hint: "Something cuddly...",
-    letter: "L",
+    letter: "M",
   },
   {
     id: 15,
     emoji: "🎂",
     topic: "What's Special",
-    question: "What's always special to us?",
+    question: "What days are always special to us?",
     answers: ["birthdays", "birthday"],
     hint: "Happens once a year for each of us...",
-    letter: "E",
+    letter: "!",
   },
   {
     id: 16,
@@ -141,7 +141,7 @@ export const quizData = [
     question: "What do our families have in common?",
     answers: ["younger sister", "sister"],
     hint: "A sibling connection...",
-    letter: "N",
+    letter: "L",
   },
   {
     id: 17,
@@ -150,7 +150,7 @@ export const quizData = [
     question: "What's my favorite thing about you?",
     answers: ["honesty"],
     hint: "A virtue that starts with H...",
-    letter: "T",
+    letter: "O",
   },
   {
     id: 18,
@@ -159,7 +159,7 @@ export const quizData = [
     question: "What physical aspect of yours do I adore most?",
     answers: ["eyes"],
     hint: "The windows to the soul...",
-    letter: "I",
+    letter: "E",
   },
   {
     id: 19,
@@ -168,7 +168,7 @@ export const quizData = [
     question: "What's my favorite food?",
     answers: ["chaat"],
     hint: "A popular Indian street food...",
-    letter: "N",
+    letter: "B",
   },
   {
     id: 20,
@@ -177,7 +177,7 @@ export const quizData = [
     question: "What do you do that makes me the happiest?",
     answers: ["smile", "laugh", "smiling", "laughing"],
     hint: "Something you do with your face...",
-    letter: "E",
+    letter: "Y",
   },
   {
     id: 21,
@@ -186,7 +186,7 @@ export const quizData = [
     question: "What's my favorite dessert?",
     answers: ["rasmalai"],
     hint: "A Bengali sweet...",
-    letter: "?",
+    letter: "I",
   },
   {
     id: 22,
@@ -195,7 +195,7 @@ export const quizData = [
     question: "What did we first properly cook together?",
     answers: ["spaghetti", "pasta"],
     hint: "An Italian dish with long noodles...",
-    letter: "!",
+    letter: "U",
   },
   {
     id: 23,
@@ -209,3 +209,7 @@ export const quizData = [
 ];
 
 export const TARGET_PHRASE = "WILL YOU BE MY VALENTINE?";
+
+// Maps quizData indices to target phrase positions
+// SCRAMBLE_ORDER.map(i => quizData[i].letter) → "W I L L Y O U B E M Y V A L E N T I N E ? ! ❤"
+export const SCRAMBLE_ORDER = [8, 4, 1, 7, 2, 16, 21, 18, 0, 13, 19, 6, 10, 15, 9, 3, 11, 20, 12, 17, 5, 14, 22];

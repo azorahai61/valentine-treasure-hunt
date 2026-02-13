@@ -2,24 +2,23 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import { playFinaleSound } from "../utils/soundManager";
 import Celebration from "./Celebration";
+import { SCRAMBLE_ORDER } from "../data/quizData";
 
 export default function FinalChallenge({
   collectedLetters,
   onComplete,
   onClose,
   forceReveal = false,
+  onStartOver,
 }) {
   const [guess, setGuess] = useState("");
   const [solved, setSolved] = useState(forceReveal);
   const [shakeKey, setShakeKey] = useState(0);
   const [wrongFeedback, setWrongFeedback] = useState(false);
+  const [showStartOver, setShowStartOver] = useState(false);
   const inputRef = useRef(null);
 
-  const scrambleOrder = [
-    5, 18, 0, 12, 9, 3, 15, 7, 20, 1, 11, 22, 6, 14, 2, 17, 8, 19, 4, 10,
-    13, 16, 21,
-  ];
-  const scrambledLetters = scrambleOrder.map((i) => collectedLetters[i] || "");
+  const scrambledLetters = SCRAMBLE_ORDER.map((i) => collectedLetters[i] || "");
 
   useEffect(() => {
     if (inputRef.current && !forceReveal) {
@@ -32,6 +31,14 @@ export default function FinalChallenge({
       playFinaleSound();
     }
   }, [forceReveal]);
+
+  // Show "Start Over" button after a delay on the celebration screen
+  useEffect(() => {
+    if (solved && onStartOver) {
+      const timer = setTimeout(() => setShowStartOver(true), 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [solved, onStartOver]);
 
   const normalize = (str) =>
     str
@@ -113,6 +120,20 @@ export default function FinalChallenge({
           >
             — With all my love, Yash
           </motion.p>
+
+          {showStartOver && onStartOver && (
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              onClick={onStartOver}
+              className="mt-8 px-6 py-2 bg-white/20 text-white/80 text-sm
+                         rounded-full border border-white/30 cursor-pointer
+                         hover:bg-white/30 hover:text-white transition-all
+                         backdrop-blur-sm"
+            >
+              Start Over
+            </motion.button>
+          )}
         </motion.div>
       </motion.div>
     );

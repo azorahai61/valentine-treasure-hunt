@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { validateAnswer } from "../utils/answerValidator";
 import { playCorrectSound } from "../utils/soundManager";
 
-export default function QuizModal({ quiz, onComplete, onClose, isCompleted }) {
+export default function QuizModal({ quiz, onComplete, onClose, isCompleted, onResetQuiz }) {
   const [userInput, setUserInput] = useState("");
   const [attempts, setAttempts] = useState(0);
   const [feedback, setFeedback] = useState(null);
@@ -11,12 +11,41 @@ export default function QuizModal({ quiz, onComplete, onClose, isCompleted }) {
   const [solved, setSolved] = useState(isCompleted);
   const [showAnswer, setShowAnswer] = useState(false);
   const inputRef = useRef(null);
+  const closeTimeoutRef = useRef(null);
 
   useEffect(() => {
     if (inputRef.current && !isCompleted) {
       setTimeout(() => inputRef.current.focus(), 300);
     }
   }, [isCompleted]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
+
+  const handleRetry = () => {
+    // Cancel any pending auto-close
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    // Reset the quiz in parent state
+    onResetQuiz(quiz.id);
+    // Reset all local state
+    setSolved(false);
+    setAttempts(0);
+    setFeedback(null);
+    setShowHint(false);
+    setShowAnswer(false);
+    setUserInput("");
+    // Re-focus the input
+    setTimeout(() => {
+      if (inputRef.current) inputRef.current.focus();
+    }, 100);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,7 +60,7 @@ export default function QuizModal({ quiz, onComplete, onClose, isCompleted }) {
       setFeedback({ type: "correct", message: "You got it! 🎉" });
       playCorrectSound();
       onComplete(quiz.id);
-      setTimeout(onClose, 2500);
+      closeTimeoutRef.current = setTimeout(onClose, 2500);
     } else if (newAttempts >= 3) {
       setSolved(true);
       setShowAnswer(true);
@@ -41,7 +70,7 @@ export default function QuizModal({ quiz, onComplete, onClose, isCompleted }) {
       });
       playCorrectSound();
       onComplete(quiz.id);
-      setTimeout(onClose, 3500);
+      closeTimeoutRef.current = setTimeout(onClose, 3500);
     } else {
       if (result.closeness === "close") {
         setFeedback({ type: "close", message: "So close! Try again 💭" });
@@ -159,6 +188,21 @@ export default function QuizModal({ quiz, onComplete, onClose, isCompleted }) {
             >
               {quiz.letter}
             </span>
+
+            {onResetQuiz && (
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={handleRetry}
+                className="block mx-auto mt-3 text-xs text-rose-red/70
+                           underline underline-offset-2 cursor-pointer
+                           hover:text-rose-red transition-colors bg-transparent
+                           border-none p-0"
+              >
+                Try Again?
+              </motion.button>
+            )}
           </motion.div>
         )}
       </motion.div>

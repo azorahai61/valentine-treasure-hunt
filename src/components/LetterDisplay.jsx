@@ -1,12 +1,8 @@
 import { motion } from "motion/react";
+import { SCRAMBLE_ORDER } from "../data/quizData";
 
 export default function LetterDisplay({ letters }) {
-  const scrambleOrder = [
-    5, 18, 0, 12, 9, 3, 15, 7, 20, 1, 11, 22, 6, 14, 2, 17, 8, 19, 4, 10,
-    13, 16, 21,
-  ];
-
-  const displayLetters = scrambleOrder
+  const displayLetters = SCRAMBLE_ORDER
     .filter((i) => i < letters.length)
     .map((i) => letters[i])
     .filter(Boolean);

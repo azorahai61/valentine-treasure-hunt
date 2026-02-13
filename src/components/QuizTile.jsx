@@ -3,45 +3,44 @@ import { motion } from "motion/react";
 export default function QuizTile({ quiz, isCompleted, onClick }) {
   return (
     <motion.button
-      whileHover={{ scale: 1.05, y: -2 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.25, y: -4 }}
+      whileTap={{ scale: 0.85 }}
       onClick={onClick}
-      className={`relative w-full aspect-square rounded-tile flex flex-col
-                  items-center justify-center gap-1 p-2 cursor-pointer
-                  transition-shadow duration-300 border-2
-                  ${
-                    isCompleted
-                      ? "bg-gradient-to-br from-pink-200 to-pink-soft shadow-tile border-rose-red/30"
-                      : "bg-white shadow-tile hover:shadow-tile-hover border-transparent"
-                  }`}
+      className="relative flex items-center justify-center w-14 h-14
+                 md:w-16 md:h-16 cursor-pointer bg-transparent border-none
+                 outline-none p-0"
+      style={{
+        filter: isCompleted
+          ? "drop-shadow(0 0 8px rgba(255, 107, 157, 0.6))"
+          : "none",
+      }}
+      aria-label={quiz.topic}
     >
-      <span className="text-2xl md:text-3xl" role="img" aria-label={quiz.topic}>
-        {quiz.emoji}
-      </span>
-
       <span
-        className="text-[10px] md:text-xs font-medium text-charcoal/80
-                    leading-tight text-center line-clamp-2"
+        className={`text-4xl md:text-[2.5rem] select-none transition-all duration-300
+                    ${isCompleted ? "" : "grayscale-[20%] opacity-75"}`}
       >
-        {quiz.topic}
+        {quiz.emoji}
       </span>
 
       {isCompleted && (
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="absolute -top-1 -right-1 w-6 h-6 bg-green-500
+          className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-green-500
                      rounded-full flex items-center justify-center shadow-sm"
         >
-          <span className="text-white text-xs font-bold">&#10003;</span>
+          <span className="text-white text-[10px] font-bold">&#10003;</span>
         </motion.div>
       )}
 
       {isCompleted && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="absolute bottom-0.5 right-1.5 text-xs font-bold text-rose-red"
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute -bottom-1 right-0 text-[10px] font-bold
+                     text-rose-red bg-white/90 rounded-full w-4 h-4
+                     flex items-center justify-center shadow-sm"
         >
           {quiz.letter}
         </motion.div>

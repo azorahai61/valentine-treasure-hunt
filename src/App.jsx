@@ -19,9 +19,10 @@ function App() {
   const [showGrandFinale, setShowGrandFinale] = useState(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
 
-  const collectedLetters = quizData
-    .filter((q) => completedQuizzes.includes(q.id))
-    .map((q) => q.letter);
+  // Sparse array: index = quiz position in quizData, value = letter or null
+  const collectedLetters = quizData.map((q) =>
+    completedQuizzes.includes(q.id) ? q.letter : null
+  );
 
   const allComplete = completedQuizzes.length === quizData.length;
 
@@ -52,6 +53,22 @@ function App() {
     setShowGrandFinale(true);
   }, []);
 
+  // Reset a single quiz
+  const handleResetQuiz = useCallback(
+    (quizId) => {
+      setCompletedQuizzes((prev) => prev.filter((id) => id !== quizId));
+    },
+    [setCompletedQuizzes]
+  );
+
+  // Reset all progress
+  const handleResetAll = useCallback(() => {
+    setCompletedQuizzes([]);
+    setShowFinalChallenge(false);
+    setShowGrandFinale(false);
+    setSelectedQuiz(null);
+  }, [setCompletedQuizzes]);
+
   if (showGrandFinale) {
     return (
       <div onClick={handleFirstInteraction}>
@@ -60,6 +77,7 @@ function App() {
           onComplete={() => {}}
           onClose={() => {}}
           forceReveal={true}
+          onStartOver={handleResetAll}
         />
       </div>
     );
@@ -74,6 +92,7 @@ function App() {
         allComplete={allComplete}
         onSelectQuiz={setSelectedQuiz}
         onOpenFinalChallenge={() => setShowFinalChallenge(true)}
+        onResetAll={handleResetAll}
       />
 
       <AnimatePresence>
@@ -84,6 +103,7 @@ function App() {
             onComplete={handleQuizComplete}
             onClose={handleCloseQuiz}
             isCompleted={completedQuizzes.includes(selectedQuiz.id)}
+            onResetQuiz={handleResetQuiz}
           />
         )}
       </AnimatePresence>
@@ -94,6 +114,7 @@ function App() {
             collectedLetters={collectedLetters}
             onComplete={handleFinaleComplete}
             onClose={() => setShowFinalChallenge(false)}
+            onStartOver={handleResetAll}
           />
         )}
       </AnimatePresence>
