@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pink-soft: #FFB6C1;
+  --color-rose-red: #FF6B9D;
+  --color-warm-coral: #FF7F7F;
+  --color-cream: #FFF5F5;
+  --color-charcoal: #333333;
+  --color-pink-100: #FFF0F3;
+  --color-pink-200: #FFD6E0;
+  --color-pink-300: #FFB6C1;
+  --color-pink-400: #FF9DAF;
+  --color-rose-light: #FF8FB1;
+  --color-gold: #FFD700;
+  --color-gold-light: #FFF4CC;
+
+  --font-cursive: 'Dancing Script', cursive;
+  --font-body: 'Poppins', sans-serif;
+
+  --shadow-soft: 0 4px 15px rgba(255, 107, 157, 0.2);
+  --shadow-glow: 0 0 20px rgba(255, 107, 157, 0.4);
+  --shadow-tile: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-tile-hover: 0 8px 25px rgba(255, 107, 157, 0.3);
+
+  --radius-card: 16px;
+  --radius-tile: 12px;
+  --radius-button: 24px;
+  --radius-modal: 20px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-pink-soft);
+  border-radius: 3px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-heartbeat,
+  .animate-sparkle {
+    animation: none;
+  }
+}
